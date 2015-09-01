@@ -1,6 +1,9 @@
-#info {
+#sm_col {
 	position: center;
-	background-color: gray;
-	width: 1000px;
+	border: 2px black;
 }
 
+#pics {
+	font-size: 12px;
+	padding-top: 60px;
+}
