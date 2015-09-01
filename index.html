@@ -7,32 +7,11 @@
 	<body>
 		test
 		<button id="test"> test </button>
+		<div id = "info"></div>
 		<script src="bower_components/topojson/topojson.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src ="app/app.js"></script>
 		<script type = "text/javascript">
-
-			// var map = new SimpleMapD3({
-		 //    container: '#simple-map-d3-example',
-		 //    datasource: 'world.geo.json'
-		 //  });
-
-			  // var worldMap = SimpleMapD3({
-				 //    container: '.simple-map-d3-world-map',
-				 //    datasource: 'bower_components/simple-map-d3/example-data/world-population.geo.json',
-				 //    projection: 'equirectangular',
-				 //    colorOn: true,
-				 //    colorProperty: 'POP2005',
-				 //    colorSet: 'Paired',
-				 //    colorScale: 'quantize',
-				 //    tooltipOn: true,
-				 //    graticuleOn: true,
-				 //    globeOn: true,
-				 //    legendOn: false,
-				 //    startManually: true
-				 //  }).start();
-
-			  // console.log("here");
 
 			var canvas = d3.select("body").append("svg")
 							.attr('width', 1000)
@@ -47,7 +26,13 @@
 				                d3.select(this).style({
 							        "fill": "blue"
 							      })
+				   
+				                console.log(d.properties.NAME);
+				                $('#info').append(d.properties.NAME);
+				                $('#info').append('population:' + d.properties.POP2005);
+				        
 				                console.log('mouseover');
+				    
             				})
             				.on('mouseout', function(d,i) {
             					var currentState = this;
@@ -55,6 +40,7 @@
 							        'fill': 'black'
 							      });
 				                console.log('mouseout');
+				                 $('#info').text('');
             				})
 
 				var projection = d3.geo.mercator();
@@ -64,6 +50,11 @@
 								.attr("d", path)
 								.attr("class", "area")
 								.attr("fill-opacity", 0.5)
+
+				var country = function(d) {
+					console.log(d.properties.NAME);
+				}
+				var textBox = $('#info.append')
 			})
 		</script>
 	</body>
