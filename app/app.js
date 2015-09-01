@@ -1,0 +1,3 @@
+var fetchFotos = function(name) {
+	
+}
