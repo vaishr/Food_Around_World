@@ -42,10 +42,28 @@
 							.attr('width', 3000)
 							.attr('height', 3000)
 				d3.json('world.geojson', function(data) {
-				var group= canvas.selectAll('g')
+				var group = canvas.selectAll('g')
 							.data(data.features)
 							.enter()
 							.append("g")
+							.on('mouseover', function(d, i) {
+				                var currentState = this;
+				                d3.select(this).style({
+							        'stroke-opacity': 1,
+							        'stroke-width': 3,
+							        'stroke': '#f00',
+							        'fill': '#f00'
+							      });
+				                console.log('mouseover');
+            				})
+            				.on('mouseout', function(d,i) {
+            					var currentState = this;
+				                d3.select(this).style({
+							        'stroke-opacity': 0
+							 
+							      });
+				                console.log('mouseout');
+            				})
 
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
@@ -53,7 +71,7 @@
 				var areas = group.append("path")
 								.attr("d", path)
 								.attr("class", "area")
-								.attr("fill", "steelblue");
+								.attr("fill", "gray");
 			})
 		</script>
 	</body>
