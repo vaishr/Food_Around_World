@@ -5,9 +5,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js" charset="utf-8"></script>
 	</head>
 	<body>
-		test
-		<button id="test"> test </button>
 		<div id = "info"></div>
+		<div id = 'pics'> </div>
 		<script src="bower_components/topojson/topojson.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src ="app/app.js"></script>
@@ -29,7 +28,7 @@
 				   
 				                console.log(d.properties.NAME);
 				                $('#info').append(d.properties.NAME);
-				                $('#info').append('population:' + d.properties.POP2005);
+				                $('#info').append('<br>' + 'population: ' + d.properties.POP2005);
 				        
 				                console.log('mouseover');
 				    
@@ -42,6 +41,11 @@
 				                console.log('mouseout');
 				                 $('#info').text('');
             				})
+            				.on('click', function(d,i) {
+            					var currentState = this;
+            					var name = d.properties.NAME;
+            					
+            				})
 
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
@@ -50,11 +54,6 @@
 								.attr("d", path)
 								.attr("class", "area")
 								.attr("fill-opacity", 0.5)
-
-				var country = function(d) {
-					console.log(d.properties.NAME);
-				}
-				var textBox = $('#info.append')
 			})
 		</script>
 	</body>
