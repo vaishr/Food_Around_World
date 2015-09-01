@@ -3,18 +3,14 @@
 		<meta charset = "UTF-8" http-equiv="encoding">
 		<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js" charset="utf-8"></script>
-		<link rel="stylesheet" href="bower_components/simple-map-d3/dist/simple-map-d3.css">
-		<script src="bower_components/simple-map-d3/dist/simple-map-d3.js" charset="utf-8"></script>
 	</head>
 	<body>
 		test
 		<button id="test"> test </button>
-		<div id="simple-map-d3-example"></div>
 		<script src="bower_components/topojson/topojson.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-		<script src= "server.js"></script>
 		<script src ="app/app.js"></script>
-			<script type = "text/javascript">
+		<script type = "text/javascript">
 
 			// var map = new SimpleMapD3({
 		 //    container: '#simple-map-d3-example',
@@ -49,18 +45,14 @@
 							.on('mouseover', function(d, i) {
 				                var currentState = this;
 				                d3.select(this).style({
-							        'stroke-opacity': 1,
-							        'stroke-width': 3,
-							        'stroke': '#f00',
-							        'fill': '#f00'
-							      });
+							        "fill": "blue"
+							      })
 				                console.log('mouseover');
             				})
             				.on('mouseout', function(d,i) {
             					var currentState = this;
 				                d3.select(this).style({
-							        'stroke-opacity': 0
-							 
+							        'fill': 'black'
 							      });
 				                console.log('mouseout');
             				})
@@ -68,10 +60,12 @@
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
 
+
 				var areas = group.append("path")
 								.attr("d", path)
 								.attr("class", "area")
-								.attr("fill", "gray");
+								.attr("fill-opacity", 0.5)
+								//.attr("fill", "b");
 			})
 		</script>
 	</body>
