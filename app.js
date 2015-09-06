@@ -1,5 +1,3 @@
-var APIkey = "ada57877f1d9ec39d7da7278e9ff0c95";
-
 var fetchFotos = function(name) {
 	return $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
         {
@@ -15,6 +13,9 @@ var fetchFotos = function(name) {
         })
 };
 
+function addCommas(intNum) {
+  return (intNum + '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+}
 
 
 

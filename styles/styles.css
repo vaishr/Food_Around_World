@@ -1,9 +1,12 @@
 #sm_col {
 	position: center;
-	border: 2px black;
 }
 
 #pics {
 	font-size: 12px;
 	padding-top: 60px;
+}
+
+h1 {
+	padding-left: 60px;
 }

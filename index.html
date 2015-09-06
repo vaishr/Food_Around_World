@@ -3,16 +3,14 @@
 		<meta charset = "UTF-8" http-equiv="encoding">
 		<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js" charset="utf-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js" charset="utf-8"> </script>
 	</head>
 	<body>
-	
-			<h1> food around the world </h1>
-	
+		<h1> food around the world </h1>
 		<div class = 'row'>
 			<div class = "col-md-8" id="big_col"></div>
 			<div class = "col-md-4" id="sm_col"></div>
-				<div class = 'row' id = "pics"></div>
+			<div class = 'row' id = "pics"></div>
 		</div>
 		<script src="bower_components/topojson/topojson.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -30,17 +28,22 @@
 							.append("g")
 							.on('mouseover', function(d, i) {
 				                var currentState = this;
-				                d3.select(this).style({
-							        "fill": "blue"
+				                d3.select(this).
 
-							      })
 									// .attr('x', function(d) {return path.centroid(d)[0];})
 									// .attr('y', function(d) {return path.centroid(d)[1];})	
 									// .attr('text', function(d) {return d.properties.NAME;})
+				                style({
+							        "fill": "blue"
+
+							      })
+									.attr('x', function(d) {return path.centroid(d)[0];})
+									.attr('y', function(d) {return path.centroid(d)[1];})	
+									.attr('text', function(d) {return d.properties.NAME;})
 									console.log('this', this);			   
 				                console.log(d.properties.NAME);
 				                $('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
-				                $('#sm_col').append('<br>' + 'population: ' + d.properties.POP2005);
+				                $('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
 				        
 				                console.log('mouseover');
 				    
