@@ -1,0 +1,24 @@
+{
+  "name": "MKS_solo",
+  "version": "0.0.0",
+  "description": "### Overview:",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaishr/solo_MVP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaishr/solo_MVP/issues"
+  },
+  "homepage": "https://github.com/vaishr/solo_MVP"
+}
