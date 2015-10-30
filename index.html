@@ -37,18 +37,14 @@
 										// .attr('x', function(d) {return path.centroid(d)[0];})
 										// .attr('y', function(d) {return path.centroid(d)[1];})	
 										// .attr('text', function(d) {return d.properties.NAME;})
-										console.log('this', this);			   
-										console.log(d.properties.NAME);
 										$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
 										$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
-										console.log('mouseover');
 									})
 				.on('mouseout', function(d,i) {
 					var currentState = this;
 					d3.select(this).style({
 						'fill': 'black'
 					});
-					console.log('mouseout');
 					$('#sm_col').text('');
 				})
 				.on('click', function(d,i) {
@@ -58,7 +54,6 @@
 					$('#pics').text("food in "+ name + ":");
 					$('#pics').append('<br>')
 					fetchFotos(name);
-					console.log(fetchFotos(name));
 				})
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
