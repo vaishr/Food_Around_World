@@ -22,7 +22,7 @@
 			.attr('width', 1000)
 			.attr('height', 700)
 			.attr('class', 'map')
-			d3.json('world.geojson', function(data) {
+			d3.json('world.json', function(data) {
 				var group = canvas.selectAll('g')
 				.data(data.features)
 				.enter()
