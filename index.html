@@ -1,71 +1,69 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset = "UTF-8" http-equiv="encoding"/>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-		<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
-	</head>
-	<body>
-		<h1> food around the world </h1>
-		<div class = 'row'>
-			<div class = "col-md-8" id="big_col"></div>
-			<div class = "col-md-4" id="sm_col"></div>
-			<div class = 'row' id = "pics"></div>
-		</div>
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="bower_components/d3/d3.min.js"></script>
-		<script src="bower_components/topojson/topojson.js"></script>
-		<script src ="app.js"></script>
-		<script type = "text/javascript">
-			
-			var width = 1000;
-			var height = 725;
+<head>
+	<meta charset = "UTF-8" http-equiv="encoding"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
+</head>
+<body>
+	<h1> food around the world </h1>
+	<div class = 'row'>
+		<div class = "col-md-8" id="big_col"></div>
+		<div class = "col-md-4" id="sm_col"></div>
+		<div class = 'row' id = "pics"></div>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/d3/d3.min.js"></script>
+	<script src="bower_components/topojson/topojson.js"></script>
+	<script src ="app.js"></script>
+	<script type = "text/javascript">
 
-			var canvas = d3.select("#big_col").append("svg")
-			.attr('width', width)
-			.attr('height', height)
-			.attr('class', 'map')
-			d3.json('world.json', function(data) {
-				var group = canvas.selectAll('g')
-				.data(data.features)
-				.enter()
-				.append("g")
-				.on('mouseover', function(d, i) {
-					var currentState = this;
-					d3.select(this).
-										style({
-											"fill": "blue"
-										})
+		var width = 1000;
+		var height = 725;
+
+		var canvas = d3.select("#big_col").append("svg")
+		.attr('width', width)
+		.attr('height', height)
+		.attr('class', 'map')
+		d3.json('world.json', function(data) {
+			var group = canvas.selectAll('g')
+			.data(data.features)
+			.enter()
+			.append("g")
+			.on('mouseover', function(d, i) {
+				var currentState = this;
+				d3.select(this).
+				style({
+					"fill": "blue"
+				})
 										//trying to get labels to display in middle of countries:
 										// .attr('x', function(d) {return path.centroid(d)[0];})
 										// .attr('y', function(d) {return path.centroid(d)[1];})	
 										// .attr('text', function(d) {return d.properties.NAME;})
-										$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
-										$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
-									})
-				.on('mouseout', function(d,i) {
-					var currentState = this;
-					d3.select(this).style({
-						'fill': 'black'
-					});
-					$('#sm_col').text('');
-				})
-				.on('click', function(d,i) {
-					$("#sm_col").text("");
-					var currentState = this;
-					var name = d.properties.NAME;
-					$('#pics').text("food in "+ name + ":");
-					$('#pics').append('<br>')
-					fetchFotos(name);
-				})
-				var projection = d3.geo.mercator().scale(150).translate([width/2 - 20, height/2]);
-				var path = d3.geo.path().projection(projection);
-				var areas = group.append("path")
-				.attr("d", path)
-				.attr("class", "area")
-				.attr("fill-opacity", 0.5)
+				$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
+				$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
 			})
-		</script>
-	</body>
+			.on('mouseout', function(d,i) {
+				d3.select(this).style({
+					'fill': 'black'
+				});
+				$('#sm_col').text('');
+			})
+			.on('click', function(d,i) {
+				$("#sm_col").text("");
+				var name = d.properties.NAME;
+				$('#pics').text("food in "+ name + ":");
+				$('#pics').append('<br>')
+				fetchFotos(name);
+			})
+			var projection = d3.geo.mercator().scale(150).translate([width/2 - 20, height/2]);
+			var path = d3.geo.path().projection(projection);
+			var areas = group.append("path")
+			.attr("d", path)
+			.attr("class", "area")
+			.attr("fill-opacity", 0.5)
+		})
+</script>
+</body>
 </html>
