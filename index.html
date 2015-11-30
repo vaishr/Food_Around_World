@@ -26,21 +26,17 @@
 		.attr('width', width)
 		.attr('height', height)
 		.attr('class', 'map')
+
 		d3.json('world.json', function(data) {
 			var group = canvas.selectAll('g')
 			.data(data.features)
 			.enter()
 			.append("g")
 			.on('mouseover', function(d, i) {
-				var currentState = this;
 				d3.select(this).
 				style({
 					"fill": "blue"
 				})
-										//trying to get labels to display in middle of countries:
-										// .attr('x', function(d) {return path.centroid(d)[0];})
-										// .attr('y', function(d) {return path.centroid(d)[1];})	
-										// .attr('text', function(d) {return d.properties.NAME;})
 				$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
 				$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
 			})
