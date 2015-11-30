@@ -13,7 +13,7 @@ var fetchFotos = function(name) {
                 $("<img/>").attr("src", item.media.m).appendTo("#pics").wrap("<a href=" + item.link + "></a>");
                 }
             })
-        })
+        });
 };
 
 function addCommas(intNum) {
@@ -21,7 +21,7 @@ function addCommas(intNum) {
 }
 
 function noPicsMessage(name) {
-    var message = "<br><p><i>Sorry, could not fetch any pictures of food from " + name + ".  Try another country! :)</i></p>"
-    $('#pics').append(message);
+     var message = "<br><p><i>Sorry, could not fetch any pictures of food from " + name + ".  Try another country! :)</i></p>"
+     $('#pics').append(message);
 }
 
