@@ -5,7 +5,7 @@ var fetchFotos = function(name) {
             format: "json"
         })
 		.then(function(data){
-            if (!data.length) {noPicsMessage(name);};
+            if (!data.items.length) {noPicsMessage(name);};
             $.each(data.items, function(i, item){
                 if(i <= 5) {
                 console.log("data.items", data.items);
