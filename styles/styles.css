@@ -12,3 +12,13 @@ h1 {
 img {
 	padding: 4px;
 }
+
+.gear_load { 
+  width: 100px; 
+  margin: 0 auto; 
+  padding: 12% 0;
+}
+
+.gear_load img {
+  padding: 10% 0;
+}

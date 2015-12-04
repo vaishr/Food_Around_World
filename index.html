@@ -7,11 +7,15 @@
 	<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
 <body>
-	<h1> food around the world </h1>
 	<div class = 'row'>
+	<h1> food around the world </h1>
+		<div class = "gear_load">
+			<img src = "/styles/gears.gif">
+			<p>Loading...</p>
+		</div>
 		<div class = "col-md-8" id="big_col"></div>
 		<div class = "col-md-4" id="sm_col"></div>
-		<div class = 'row' id = "pics"></div>
+		<div class = 'row' id="pics"></div>
 	</div>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/d3/d3.min.js"></script>
@@ -39,6 +43,7 @@
 				})
 				$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
 				$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
+
 			})
 			.on('mouseout', function(d,i) {
 				d3.select(this).style({
@@ -52,6 +57,7 @@
 				$('#pics').text("food in "+ name + ":");
 				$('#pics').append('<br>')
 				fetchFotos(name);
+
 			})
 			var projection = d3.geo.mercator().scale(150).translate([width/2 - 20, height/2]);
 			var path = d3.geo.path().projection(projection);
@@ -59,7 +65,9 @@
 			.attr("d", path)
 			.attr("class", "area")
 			.attr("fill-opacity", 0.5)
+			removeSpinner();
 		})
+
 </script>
 </body>
 </html>
