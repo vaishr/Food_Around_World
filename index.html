@@ -42,7 +42,7 @@
 					"fill": "blue"
 				})
 				$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
-				$('#sm_col').append('<br>' + 'population: ' + addCommas(d.properties.POP2005));
+				$('#sm_col').append('<br>' + 'population: ' + formatNum(d.properties.POP2005));
 
 			})
 			.on('mouseout', function(d,i) {
@@ -65,7 +65,8 @@
 			.attr("d", path)
 			.attr("class", "area")
 			.attr("fill-opacity", 0.5)
-			removeSpinner();
+
+			$('.gear_load').hide();
 		})
 
 </script>
