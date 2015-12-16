@@ -1,7 +1,8 @@
 
 # World Eats
 
-Interactive food map of the world made with D3, Node.js, Express, and Flickr API
+Interactive food map of the world made with D3, Node.js, Express, and Flickr
+
 Play with it here: http://world-eats.herokuapp.com
 
 ## Requirements
@@ -24,9 +25,10 @@ bower install
 ### Viewing the project
 
 Starting the server:
-- navigate to root directory in terminal
-- run node server.js
+```sh
+node server.js
+```
 
 In browser:
-- Navigate to : 
+- Navigate to: 
 - localhost:5000
