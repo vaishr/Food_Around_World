@@ -14,8 +14,7 @@
   ],
   "dependencies": {
     "d3": "~3.5.6",
-    "jquery": "~2.1.4",
-    "topojson": "~1.6.19"
+    "jquery": "~2.1.4"
   },
   "resolutions": {
     "d3": "~3.5.6"
