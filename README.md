@@ -1,5 +1,5 @@
 
-# World Eats
+# Food Around the World
 
 Interactive food map of the world made with D3, Node.js, Express, and Flickr
 

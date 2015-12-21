@@ -3,71 +3,78 @@
 <head>
 	<meta charset = "UTF-8" http-equiv="encoding"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="styles/styles.css"/>
 </head>
 <body>
-	<div class = 'row'>
+	<div class = "row">
 	<h1> food around the world </h1>
 		<div class = "gear_load">
 			<img src = "/styles/gears.gif">
 			<p>Loading...</p>
 		</div>
-		<div class = "col-md-8" id="big_col"></div>
-		<div class = "col-md-4" id="sm_col"></div>
-		<div class = 'row' id="pics"></div>
+		<div class = "col-md-8" id="map_div"></div>
+		<div class = "col-md-4" id="country_info"></div>
+		<div class = "row" id="pics"></div>
 	</div>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/d3/d3.min.js"></script>
 	<script src ="app.js"></script>
 	<script type = "text/javascript">
-
+	  //size of svg element
 		var width = 1000;
 		var height = 725;
 
-		var canvas = d3.select("#big_col").append("svg")
-		.attr('width', width)
-		.attr('height', height)
-		.attr('class', 'map')
+		//appends svg to page
+		var canvas = d3.select("#map_div").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.attr("class", "map")
 
-		d3.json('world.json', function(data) {
-			var group = canvas.selectAll('g')
+		//binds data to g element for each country and appends to DOM as child element of svg
+		d3.json("world.json", function(data) {
+			var group = canvas.selectAll("g")
 			.data(data.features)
 			.enter()
 			.append("g")
-			.on('mouseover', function(d, i) {
-				d3.select(this).
-				style({
+			//applies color change and displays country name and population on mouseover
+			.on("mouseover", function(d, i) {
+				d3.select(this).style({
 					"fill": "blue"
 				})
-				$('#sm_col').append('<strong>'+d.properties.NAME+'</strong>');
-				$('#sm_col').append('<br>' + 'population: ' + formatNum(d.properties.POP2005));
-
+				$("#country_info").append("<strong>"+d.properties.NAME+"</strong>");
+				$("#country_info").append("<br>" + "population: " + formatNum(d.properties.POP2005));
 			})
-			.on('mouseout', function(d,i) {
+			//resets style on mouseout
+			.on("mouseout", function(d,i) {
 				d3.select(this).style({
-					'fill': 'black'
+					"fill": "black"
 				});
-				$('#sm_col').text('');
+				$("#country_info").text("");
 			})
-			.on('click', function(d,i) {
-				$("#sm_col").text("");
+			//calls function which gets pics from flickr and displays them on page
+			.on("click", function(d,i) {
+				$("#country_info").text("");
 				var name = d.properties.NAME;
-				$('#pics').text("food in "+ name + ":");
-				$('#pics').append('<br>')
+				$("#pics").text("food in "+ name + ":");
+				$("#pics").append("<br>")
 				fetchFotos(name);
-
 			})
+
+			//translates 3d coordinate data into 2d map coordinates based on mercator projection
 			var projection = d3.geo.mercator().scale(150).translate([width/2 - 20, height/2]);
+			//creates new path generator based on projection
 			var path = d3.geo.path().projection(projection);
+
+			//appends path element with d attribute set to converted map coordinates to draw each country
 			var areas = group.append("path")
-			.attr("d", path)
-			.attr("class", "area")
-			.attr("fill-opacity", 0.5)
+				.attr("d", path)
+				.attr("class", "area")
+				.attr("fill-opacity", 0.5)
 
-			$('.gear_load').hide();
+			//hides page loader after the map data loads
+			$(".gear_load").hide();
 		})
-
 </script>
 </body>
 </html>
