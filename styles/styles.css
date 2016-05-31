@@ -13,6 +13,10 @@ img {
 	padding: 4px;
 }
 
+#flickerSpinner {
+  float: right;
+}
+
 .gear_load { 
   width: 100px; 
   margin: 0 auto; 
@@ -21,4 +25,11 @@ img {
 
 .gear_load img {
   padding: 10% 0;
+}
+
+#worldmap {
+  width: 100%;
+  height: auto;
+  max-width: 1000px;
+  max-height: 725px;
 }

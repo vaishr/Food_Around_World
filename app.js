@@ -1,5 +1,6 @@
 //sends get request to flickr endpoint and then add pics to page
 function fetchFotos(name) {
+    $('#pics').append('<div id="picSpinner" class="container"><img src="/styles/flickr.gif" id="flickerSpinner"><p>Fetching Photos...</p></div>');
 	return $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
     {
         tags:  name + ", food",  
@@ -8,13 +9,28 @@ function fetchFotos(name) {
     })
   //formats response and appends picture links
   .then(function(data){
-    if (!data.items.length) { noPicsMessage(name); }
-    $.each(data.items, function(i, item){
-        if(i <= 5) {
-            $("<img/>").attr("src", item.media.m).appendTo("#pics").wrap("<a href=" + item.link + "></a>");
-        }
-    })
-   })
+    var loadedImages = [];
+    var loadedCount = 6;
+    if (!data.items.length) { 
+        noPicsMessage(name); 
+        $('#picSpinner').hide();
+    }
+    if (data.items.length < 6) {
+        loadedCount = data.items.length;
+    }
+    for (var i = 0; i < 6; i++) {
+        console.log(data.items[i]);
+        $("<img>").load(function(event){ 
+            loadedImages.push(data.items[i]);
+            if (loadedImages.length === loadedCount) {
+                    $('#picSpinner').hide();
+            }
+        })
+        .attr("src", data.items[i].media.m)
+        .appendTo("#pics")
+        .wrap("<a href=" + data.items[i].link + "></a>");
+    }
+   });
 }
 
 //rounds population numbers for readability
